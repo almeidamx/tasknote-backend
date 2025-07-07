@@ -2,6 +2,13 @@
 
 Organizador de tarefas diárias com alerta de prazo.
 
+## Como clonar o repositório
+
+Clone este projeto usando o comando:
+```bash
+git clone https://github.com/almeidamx/tasknote-backend.git
+```
+
 ## Como rodar
 
 1. Instale as dependências:
