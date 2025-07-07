@@ -117,7 +117,7 @@ def enviar_email_alerta(destinatario, assunto, mensagem):
 def enviar_alertas():
     """Retorna uma lista de tarefas próximas do vencimento para alerta."""
     alertas = TaskService.enviar_alertas()
-    return alertas
+    return {"alertas": alertas}
 
 # Endpoint para remover um usuário pelo ID
 @app.delete('/usuario/<int:usuario_id>', tags=[usuario_tag], responses={"200": MensagemSchema, "404": ErrorSchema})
