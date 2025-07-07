@@ -84,7 +84,11 @@ def listar_tarefas():
             "data_limite": t.data_limite.isoformat() if t.data_limite else None,
             "horario_limite": t.horario_limite.isoformat() if t.horario_limite else None,
             "minutos_antes_alerta": t.minutos_antes_alerta,
-            "usuario_id": t.usuario_id
+            "usuario_id": t.usuario_id,
+            "usuario": {
+                "nome": t.usuario.nome,
+                "email": t.usuario.email
+            } if t.usuario else None
         }
         for t in tarefas
     ]
