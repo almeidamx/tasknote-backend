@@ -1,0 +1,8 @@
+flask
+flask-cors
+flask-openapi3
+flask-openapi3[swagger]
+sqlalchemy
+pydantic
+email-validator
+

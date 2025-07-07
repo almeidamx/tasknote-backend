@@ -1,0 +1,69 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TaskNote API",
+    "description": "API para gerenciamento de tarefas com alerta de prazo.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/cadastrar_tarefa": {
+      "post": {
+        "summary": "Cadastrar nova tarefa",
+        "parameters": [
+          {"name": "body", "in": "body", "required": true, "schema": {"$ref": "#/definitions/TarefaInput"}}
+        ],
+        "responses": {"200": {"description": "Tarefa cadastrada"}},
+        "x-examples": {"curl": "curl -X POST http://localhost:5000/cadastrar_tarefa -H 'Content-Type: application/json' -d '{\"titulo\":\"Exemplo\",\"descricao\":\"Desc\",\"prioridade\":\"High\",\"data_limite\":\"2025-07-01\",\"horario_limite\":\"18:00\",\"alerta_ativado\":true,\"minutos_antes_alerta\":30}'"}
+      }
+    },
+    "/listar_tarefas": {
+      "get": {
+        "summary": "Listar todas as tarefas",
+        "responses": {"200": {"description": "Lista de tarefas"}},
+        "x-examples": {"curl": "curl http://localhost:5000/listar_tarefas"}
+      }
+    },
+    "/configurar_alerta": {
+      "post": {
+        "summary": "Configurar alerta de tarefa",
+        "parameters": [
+          {"name": "body", "in": "body", "required": true, "schema": {"$ref": "#/definitions/ConfigAlertaInput"}}
+        ],
+        "responses": {"200": {"description": "Alerta configurado"}},
+        "x-examples": {"curl": "curl -X POST http://localhost:5000/configurar_alerta -H 'Content-Type: application/json' -d '{\"id\":1,\"alerta_ativado\":true,\"minutos_antes_alerta\":15}'"}
+      }
+    },
+    "/enviar_alertas": {
+      "get": {
+        "summary": "Enviar alertas de tarefas próximas do vencimento",
+        "responses": {"200": {"description": "Tarefas com alerta ativo e próximas do vencimento"}},
+        "x-examples": {"curl": "curl http://localhost:5000/enviar_alertas"}
+      }
+    }
+  },
+  "definitions": {
+    "TarefaInput": {
+      "type": "object",
+      "properties": {
+        "titulo": {"type": "string"},
+        "descricao": {"type": "string"},
+        "prioridade": {"type": "string"},
+        "data_limite": {"type": "string", "format": "date"},
+        "horario_limite": {"type": "string", "format": "time"},
+        "alerta_ativado": {"type": "boolean"},
+        "minutos_antes_alerta": {"type": "integer"}
+      }
+    },
+    "ConfigAlertaInput": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer"},
+        "alerta_ativado": {"type": "boolean"},
+        "minutos_antes_alerta": {"type": "integer"}
+      }
+    }
+  }
+}
